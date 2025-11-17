@@ -5,11 +5,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PH Tube JS</title>
+  <!-- font-family -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+    .fontFamily {
+      font-family: "Inter", sans-serif;
+    }
+  </style>
+  <!-- font awesome -->
+  <script src="https://kit.fontawesome.com/21de3a4f2a.js" crossorigin="anonymous"></script>
+  <!-- daisy UI -->
   <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
-<body class="container mx-auto">
+<body class="container mx-auto fontFamily">
   <header class="flex justify-between items-center mt-12 mb-8">
     <div><img src="assets/Logo.png" alt="Logo"></div>
     <div>
@@ -23,8 +34,7 @@
   <nav id="category-container" class="flex justify-center gap-6 mt-8 mb-10">
     <button class="text-xl font-semibold px-5 py-3 bg-red-500 rounded-md text-white btn border-red-600">All</button>
   </nav>
-  <main>
-
+  <main id="videos-container" class="grid grid-cols-4 gap-6 mb-30">
   </main>
   <script src="script/index.js"></script>
 </body>
