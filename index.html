@@ -9,10 +9,23 @@
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
-<body>
-  <header>
-    <h1>Hello World</h1>
+<body class="container mx-auto">
+  <header class="flex justify-between items-center mt-12 mb-8">
+    <div><img src="assets/Logo.png" alt="Logo"></div>
+    <div>
+      <button class="text-xl font-semibold px-5 py-3 bg-neutral-300 rounded-md text-neutral-600">Sort by view</button>
+    </div>
+    <div>
+      <button class="text-xl font-semibold px-5 py-3 bg-red-500 rounded-md text-white">Blog</button>
+    </div>
   </header>
+  <hr class="border-neutral-300 border-[1px]">
+  <nav class="flex justify-center gap-6 mt-8 mb-10">
+    <button class="text-xl font-semibold px-5 py-3 bg-red-500 rounded-md text-white btn">All</button>
+    <button class="text-xl font-semibold px-5 py-3 bg-neutral-300 rounded-md text-neutral-600 btn">Music</button>
+    <button class="text-xl font-semibold px-5 py-3 bg-neutral-300 rounded-md text-neutral-600 btn">Comedy</button>
+    <button class="text-xl font-semibold px-5 py-3 bg-neutral-300 rounded-md text-neutral-600 btn">Drawing</button>
+  </nav>
 </body>
 
 </html>
