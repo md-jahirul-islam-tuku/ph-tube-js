@@ -11,7 +11,7 @@ function displayCategories(categories) {
     const result = item.category;
     const div = document.createElement('div');
     div.innerHTML = `
-<button class="text-xl font-semibold px-5 py-3 bg-neutral-300 rounded-md text-neutral-600 btn hover:bg-red-600 hover:text-white">${result}</button>
+<button onclick="loadCategoryVideos(${item.category_id})" class="text-xl font-semibold px-5 py-3 rounded-md btn hover:bg-red-600 hover:text-white ">${result}</button>
 `
     categoryContainer.appendChild(div);
   }
@@ -19,7 +19,7 @@ function displayCategories(categories) {
 
 loadCategory()
 
-const videosContainer = document.getElementById('videos-container');
+
 
 const loadVideos = () => {
   fetch('https://openapi.programming-hero.com/api/phero-tube/videos')
@@ -28,10 +28,21 @@ const loadVideos = () => {
 }
 
 function displayVideos(videos) {
-  videos.map(video=> {
-    const verified= video.authors[0].verified;
-    const div = document.createElement('div')
-    div.innerHTML=`
+  const videosContainer = document.getElementById('videos-container');
+
+  videosContainer.innerHTML = '';
+  if (videos.length == 0) {
+    videosContainer.innerHTML = `
+    <div class="col-span-full flex flex-col justify-center items-center my-40">
+      <img class="w-40" src="assets/Icon.png" alt="">
+      <h1 class="text-3xl font-bold text-center mt-8">Oops!! Sorry, There is no <br> content here</h1>
+    </div>
+`
+  }
+  videos.map(video => {
+    const verified = video.authors[0].verified;
+    const div = document.createElement('div');
+    div.innerHTML = `
     <figure class="relative">
       <img class="w-full h-56 rounded-xl" src=${video.thumbnail} alt="">
       <div class="absolute bottom-2 right-2 bg-black/50 text-white p-2 rounded-md">
@@ -48,20 +59,24 @@ function displayVideos(videos) {
         <h3 class="text-2xl font-bold">${video.title}</h3>
         <p class="text-lg text-neutral-500 my-2">${video.authors[0].profile_name} 
         
-        ${verified? '<i class="fa-solid fa-circle-check"></i>':""}
+        ${verified ? '<i class="fa-solid fa-circle-check"></i>' : ""}
         </p>
         <p class="text-lg text-neutral-500">${video.others.views}</p>
       </div>
     </div>
     `
-    div.classList='card';
+    div.classList = 'card';
     videosContainer.append(div)
   })
 }
 
 loadVideos()
 
-
+function loadCategoryVideos(id) {
+  fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
+    .then(res => res.json())
+    .then(data => displayVideos(data.category))
+}
 
 function formatMinutes(totalMinutes) {
   const minutesInYear = 365 * 24 * 60;
@@ -72,5 +87,5 @@ function formatMinutes(totalMinutes) {
   const hours = Math.floor((totalMinutes % minutesInDay) / 60);
   const minutes = totalMinutes % 60;
 
-  return `${years?years+'y':''} ${days?days+'d':''} ${hours?hours+'h':''} ${minutes}m ago`;
-}
+  return `${years ? years + 'y' : ''} ${days ? days + 'd' : ''} ${hours ? hours + 'h' : ''} ${minutes}m ago`;
+}   
