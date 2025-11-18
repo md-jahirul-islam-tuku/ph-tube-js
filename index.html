@@ -12,10 +12,6 @@
     .fontFamily {
       font-family: "Inter", sans-serif;
     }
-    .active{
-      background-color: red;
-      color: white;
-    }
   </style>
   <!-- font awesome -->
   <script src="https://kit.fontawesome.com/21de3a4f2a.js" crossorigin="anonymous"></script>
@@ -36,7 +32,7 @@
   </header>
   <hr class="border-neutral-300 border-[1px]">
   <nav id="category-container" class="flex justify-center gap-6 mt-8 mb-10">
-    <button onclick="loadVideos()" class="text-xl font-semibold px-5 py-3 hover:bg-red-600 hover:text-white rounded-lg btn active">All</button>
+    <button id="1000" onclick="loadVideos();activeButton(id)" class="text-xl font-semibold px-5 py-3 hover:bg-red-600 hover:text-white rounded-lg btn bg-red-600 text-white">All</button>
   </nav>
   <main id="videos-container" class="grid grid-cols-4 gap-6 mb-30">
     

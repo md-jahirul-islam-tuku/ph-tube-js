@@ -6,20 +6,27 @@ const loadCategory = () => {
     .then(data => displayCategories(data.categories))
 }
 
+function activeButton(id) {
+
+const buttons = document.querySelectorAll('.btn'); // use your button class
+  buttons.forEach(btn => btn.classList.remove('bg-red-600', 'text-white'));
+
+  document.getElementById(id).classList.add('bg-red-600', 'text-white');
+}
+
+
 function displayCategories(categories) {
   for (const item of categories) {
     const result = item.category;
     const div = document.createElement('div');
     div.innerHTML = `
-<button onclick="loadCategoryVideos(${item.category_id})" class="text-xl font-semibold px-5 py-3 rounded-md btn hover:bg-red-600 hover:text-white ">${result}</button>
+<button id="${`${item.category_id}`}" onclick="loadCategoryVideos(${item.category_id}); activeButton(${item.category_id})" class="text-xl font-semibold px-5 py-3 rounded-md btn hover:bg-red-600 hover:text-white">${result}</button>
 `
     categoryContainer.appendChild(div);
   }
 }
 
 loadCategory()
-
-
 
 const loadVideos = () => {
   fetch('https://openapi.programming-hero.com/api/phero-tube/videos')
@@ -59,7 +66,7 @@ function displayVideos(videos) {
         <h3 class="text-2xl font-bold">${video.title}</h3>
         <p class="text-lg text-neutral-500 my-2">${video.authors[0].profile_name} 
         
-        ${verified ? '<i class="fa-solid fa-circle-check"></i>' : ""}
+        ${verified ? '<i class="fa-solid fa-circle-check text-blue-600"></i>' : ""}
         </p>
         <p class="text-lg text-neutral-500">${video.others.views}</p>
       </div>
@@ -75,7 +82,9 @@ loadVideos()
 function loadCategoryVideos(id) {
   fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
     .then(res => res.json())
-    .then(data => displayVideos(data.category))
+    .then(data => {
+      displayVideos(data.category)
+    })
 }
 
 function formatMinutes(totalMinutes) {
