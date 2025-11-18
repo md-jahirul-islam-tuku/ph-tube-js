@@ -8,7 +8,7 @@ const loadCategory = () => {
 
 function activeButton(id) {
 
-const buttons = document.querySelectorAll('.btn'); // use your button class
+  const buttons = document.querySelectorAll('.btn');
   buttons.forEach(btn => btn.classList.remove('bg-red-600', 'text-white'));
 
   document.getElementById(id).classList.add('bg-red-600', 'text-white');
@@ -51,12 +51,12 @@ function displayVideos(videos) {
     const div = document.createElement('div');
     div.innerHTML = `
     <figure class="relative">
-      <img class="w-full h-56 rounded-xl" src=${video.thumbnail} alt="">
+      <img class="w-full h-56" src=${video.thumbnail} alt="">
       <div class="absolute bottom-2 right-2 bg-black/50 text-white p-2 rounded-md">
       ${formatMinutes(video.others.posted_date)}
       </div>
     </figure>
-    <div class="flex gap-4 mt-5">
+    <div class="flex gap-4 mt-5 ml-5">
       <div class="avatar">
         <div class="w-12">
           <img class="h-12 rounded-full" src=${video.authors[0].profile_picture} alt="">
@@ -64,27 +64,31 @@ function displayVideos(videos) {
       </div>
       <div>
         <h3 class="text-2xl font-bold">${video.title}</h3>
-        <p class="text-lg text-neutral-500 my-2">${video.authors[0].profile_name} 
+        <p class="text-lg text-neutral-500 my-2 flex gap-1 items-center">${video.authors[0].profile_name} 
         
-        ${verified ? '<i class="fa-solid fa-circle-check text-blue-600"></i>' : ""}
+        ${verified ? `<img class="w-6 h-6" src="https://img.icons8.com/?size=100&id=SRJUuaAShjVD&format=png&color=000000" alt="">` : ""}
         </p>
         <p class="text-lg text-neutral-500">${video.others.views}</p>
       </div>
     </div>
+    <div class="mx-auto">
+    <button class="btn btn-wide">Show details</button>
+  </div>
     `
-    div.classList = 'card';
+    div.classList.add('card', 'hover:shadow-lg', 'cursor-pointer', 'transition-transform', 'duration-300', 'hover:scale-110', 'pb-5', 'rounded-2xl', 'shadow-md');
     videosContainer.append(div)
   })
 }
 
 loadVideos()
 
+
+
 function loadCategoryVideos(id) {
   fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
     .then(res => res.json())
-    .then(data => {
-      displayVideos(data.category)
-    })
+    .then(data => displayVideos(data.category)
+    )
 }
 
 function formatMinutes(totalMinutes) {
