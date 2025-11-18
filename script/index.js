@@ -28,13 +28,15 @@ const loadVideos = () => {
 }
 
 function displayVideos(videos) {
-  for (const video of videos) {
+  videos.map(video=> {
     const verified= video.authors[0].verified;
-    console.log(typeof verified)
     const div = document.createElement('div')
     div.innerHTML=`
-    <figure>
+    <figure class="relative">
       <img class="w-full h-56 rounded-xl" src=${video.thumbnail} alt="">
+      <div class="absolute bottom-2 right-2 bg-black/50 text-white p-2 rounded-md">
+      ${formatMinutes(video.others.posted_date)}
+      </div>
     </figure>
     <div class="flex gap-4 mt-5">
       <div class="avatar">
@@ -43,19 +45,32 @@ function displayVideos(videos) {
         </div>
       </div>
       <div>
-        <h3 class="text-xl font-bold">${video.title}</h3>
-        <p class="text-xl text-neutral-500 my-2">${video.authors[0].profile_name} 
+        <h3 class="text-2xl font-bold">${video.title}</h3>
+        <p class="text-lg text-neutral-500 my-2">${video.authors[0].profile_name} 
         
         ${verified? '<i class="fa-solid fa-circle-check"></i>':""}
-        
         </p>
-        <p class="text-xl text-neutral-500">${video.others.views}</p>
+        <p class="text-lg text-neutral-500">${video.others.views}</p>
       </div>
     </div>
     `
     div.classList='card';
-    videosContainer.appendChild(div)
-  }
+    videosContainer.append(div)
+  })
 }
 
 loadVideos()
+
+
+
+function formatMinutes(totalMinutes) {
+  const minutesInYear = 365 * 24 * 60;
+  const minutesInDay = 24 * 60;
+
+  const years = Math.floor(totalMinutes / minutesInYear);
+  const days = Math.floor((totalMinutes % minutesInYear) / minutesInDay);
+  const hours = Math.floor((totalMinutes % minutesInDay) / 60);
+  const minutes = totalMinutes % 60;
+
+  return `${years?years+'y':''} ${days?days+'d':''} ${hours?hours+'h':''} ${minutes}m ago`;
+}
