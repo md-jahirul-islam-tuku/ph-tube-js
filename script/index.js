@@ -52,8 +52,8 @@ function displayVideoDetails(data) {
 `
 }
 
-const loadVideos = () => {
-  fetch('https://openapi.programming-hero.com/api/phero-tube/videos')
+function loadVideos(e = "") {
+  fetch(`https://openapi.programming-hero.com/api/phero-tube/videos?title=${e}`)
     .then(res => res.json())
     .then(data => displayVideos(data.videos))
 }
@@ -124,4 +124,9 @@ function formatMinutes(totalMinutes) {
   const minutes = totalMinutes % 60;
 
   return `${years ? years + 'y' : ''} ${days ? days + 'd' : ''} ${hours ? hours + 'h' : ''} ${minutes}m ago`;
-}   
+}
+
+document.getElementById('search-box').addEventListener('keyup', (event) => {
+  const result = event.target.value;
+  loadVideos(result);
+})
