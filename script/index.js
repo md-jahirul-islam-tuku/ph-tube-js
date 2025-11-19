@@ -111,19 +111,15 @@ function displayVideos(videos) {
     `
     div.classList.add('card', 'hover:shadow-lg', 'cursor-pointer', 'transition-transform', 'duration-300', 'hover:scale-107',
       'pb-5', 'rounded-2xl', 'shadow-md');
-    videosContainer.append(div)
-  })
-  hideLoader();
-};
+      videosContainer.append(div)
+    })
+    hideLoader();
+  };
 
 loadVideos();
 function allButton() {
   showLoader();
   loadVideos();
-}
-
-function activeButton(id) {
-  document
 }
 
 function loadCategoryVideos(id) {
