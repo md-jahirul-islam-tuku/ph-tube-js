@@ -1,5 +1,15 @@
 const categoryContainer = document.getElementById('category-container');
 
+function hideLoader() {
+  document.getElementById('loader').classList.add('hidden')
+  document.getElementById('videos-container').classList.remove('hidden')
+};
+
+function showLoader() {
+  document.getElementById('loader').classList.remove('hidden')
+  document.getElementById('videos-container').classList.add('hidden')
+};
+
 const loadCategory = () => {
   fetch('https://openapi.programming-hero.com/api/phero-tube/categories')
     .then(res => res.json())
@@ -59,9 +69,11 @@ function loadVideos(e = "") {
 }
 
 function displayVideos(videos) {
+  showLoader()
   const videosContainer = document.getElementById('videos-container');
   videosContainer.innerHTML = '';
   if (videos.length == 0) {
+    showLoader()
     videosContainer.innerHTML = `
     <div class="col-span-full flex flex-col justify-center items-center my-40">
       <img class="w-40" src="assets/Icon.png" alt="">
@@ -101,13 +113,21 @@ function displayVideos(videos) {
       'pb-5', 'rounded-2xl', 'shadow-md');
     videosContainer.append(div)
   })
+  hideLoader();
+};
+
+loadVideos();
+function allButton() {
+  showLoader();
+  loadVideos();
 }
 
-loadVideos()
-
-
+function activeButton(id) {
+  document
+}
 
 function loadCategoryVideos(id) {
+  showLoader()
   fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
     .then(res => res.json())
     .then(data => displayVideos(data.category)
@@ -128,5 +148,6 @@ function formatMinutes(totalMinutes) {
 
 document.getElementById('search-box').addEventListener('keyup', (event) => {
   const result = event.target.value;
+  showLoader();
   loadVideos(result);
 })
