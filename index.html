@@ -32,13 +32,28 @@
   </header>
   <hr class="border-neutral-300 border-[1px]">
   <nav id="category-container" class="flex justify-center gap-6 mt-8 mb-10">
-    <button id="1000" onclick="loadVideos();activeButton(id)" class="text-xl font-semibold px-5 py-3 hover:bg-red-600 hover:text-white rounded-lg btn bg-red-600 text-white">All</button>
+    <button id="1000" onclick="loadVideos();activeButton(id)"
+      class="text-xl font-semibold px-5 py-3 hover:bg-red-600 hover:text-white rounded-lg btn bg-red-600 text-white">All</button>
   </nav>
   <main id="videos-container" class="grid grid-cols-4 gap-x-6 gap-y-10 mb-30">
-    
+
   </main>
+
+  <!-- Open the modal using ID.showModal() method -->
+  <dialog id="show_modal" class="modal">
+    <div id="modal-container" class="modal-box">
+      <!-- <h3 class="text-lg font-bold">Hello!</h3>
+      <p class="py-4">Press ESC key or click the button below to close</p>
+      <div class="modal-action">
+        <form method="dialog">
+          <button class="btn">Close</button>
+        </form>
+      </div> -->
+    </div>
+  </dialog>
+
   <script src="script/index.js"></script>
-  
+
 </body>
 
 </html>
