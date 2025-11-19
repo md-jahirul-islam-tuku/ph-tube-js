@@ -1,5 +1,3 @@
-const categoryContainer = document.getElementById('category-container');
-
 function hideLoader() {
   document.getElementById('loader').classList.add('hidden')
   document.getElementById('videos-container').classList.remove('hidden')
@@ -10,20 +8,13 @@ function showLoader() {
   document.getElementById('videos-container').classList.add('hidden')
 };
 
+const categoryContainer = document.getElementById('category-container');
+
 const loadCategory = () => {
   fetch('https://openapi.programming-hero.com/api/phero-tube/categories')
     .then(res => res.json())
     .then(data => displayCategories(data.categories))
 }
-
-function activeButton(id) {
-
-  const buttons = document.querySelectorAll('.btn');
-  buttons.forEach(btn => btn.classList.remove('bg-red-600', 'text-white'));
-
-  document.getElementById(id).classList.add('bg-red-600', 'text-white');
-}
-
 
 function displayCategories(categories) {
   for (const item of categories) {
@@ -34,6 +25,12 @@ function displayCategories(categories) {
 `
     categoryContainer.appendChild(div);
   }
+}
+
+function activeButton(id) {
+  const buttons = document.querySelectorAll('.btn');
+  buttons.forEach(btn => btn.classList.remove('bg-red-600', 'text-white'));
+  document.getElementById(id).classList.add('bg-red-600', 'text-white');
 }
 
 loadCategory();
@@ -73,7 +70,6 @@ function displayVideos(videos) {
   const videosContainer = document.getElementById('videos-container');
   videosContainer.innerHTML = '';
   if (videos.length == 0) {
-    showLoader()
     videosContainer.innerHTML = `
     <div class="col-span-full flex flex-col justify-center items-center my-40">
       <img class="w-40" src="assets/Icon.png" alt="">
@@ -111,12 +107,13 @@ function displayVideos(videos) {
     `
     div.classList.add('card', 'hover:shadow-lg', 'cursor-pointer', 'transition-transform', 'duration-300', 'hover:scale-107',
       'pb-5', 'rounded-2xl', 'shadow-md');
-      videosContainer.append(div)
-    })
-    hideLoader();
-  };
+    videosContainer.append(div)
+  })
+  hideLoader();
+};
 
 loadVideos();
+
 function allButton() {
   showLoader();
   loadVideos();
